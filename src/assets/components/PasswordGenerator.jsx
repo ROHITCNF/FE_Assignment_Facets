@@ -1,19 +1,21 @@
-// PasswordGenerator.js
 import React, { useState } from "react";
 
-const PasswordGenerator = () => {
+function PasswordGenerator() {
   const [passwordLength, setPasswordLength] = useState(8);
   const [includeAlphabets, setIncludeAlphabets] = useState(false);
   const [includeNumbers, setIncludeNumbers] = useState(false);
+  const [includeSpecialChars, setIncludeSpecialChars] = useState(false);
   const [password, setPassword] = useState("");
 
   const generatePassword = () => {
     const alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     const numbers = "0123456789";
+    const specialChars = "!@#$%^&*()_+-=[]{}|;:',.<>?";
     let characters = "";
 
     if (includeAlphabets) characters += alphabets;
     if (includeNumbers) characters += numbers;
+    if (includeSpecialChars) characters += specialChars;
 
     if (characters === "") {
       setPassword("Select an option to generate a password.");
@@ -56,6 +58,14 @@ const PasswordGenerator = () => {
           />
           Include Numbers
         </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={includeSpecialChars}
+            onChange={(e) => setIncludeSpecialChars(e.target.checked)}
+          />
+          Include Special Characters
+        </label>
       </div>
       <button onClick={generatePassword}>Generate Password</button>
       <div>
@@ -63,6 +73,6 @@ const PasswordGenerator = () => {
       </div>
     </div>
   );
-};
+}
 
 export default PasswordGenerator;
